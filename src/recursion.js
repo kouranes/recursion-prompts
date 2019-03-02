@@ -23,21 +23,15 @@ var factorial = function(n) {
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
-  //base case1: one number in array, return sum += array[0] 
-  //recursive case: more than 1 number in array, sum += array[0]
  //+ sum(array.slice(1)};
- var result = 0;
- if (array.length === 1) {
-   return result += array[0];
- } else {
-   for (var i = 0; i < array.length; i++) {
-     var first = array[0];
-     array = array.slice(i + 1);
-     result += first + sum(array);
-   }
- }
+  if (array.length === 0) {
+    return 0;
+  } else {
+    const restOfArray = array.slice(1);
+    const sumOfRest = sum(restOfArray);
+    return array[0] + sumOfRest;
+  }
 }
-
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
