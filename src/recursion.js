@@ -23,13 +23,20 @@ var factorial = function(n) {
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+  if (!Array.isArray(array)) {
+    throw new Error('not an array ' + JSON.stringify(array));
+  }
  //+ sum(array.slice(1)};
   if (array.length === 0) {
     return 0;
   } else {
+    const first = array[0];
+    if (typeof first !== 'number') {
+      throw new Error('not a number: ' + JSON.stringify({ first, array }));
+    }
     const restOfArray = array.slice(1);
     const sumOfRest = sum(restOfArray);
-    return array[0] + sumOfRest;
+    return first + sumOfRest;
   }
 }
 
@@ -54,11 +61,29 @@ var arraySum = function(array) {
   return final;
 };
 
+/**
+ * 4. Check if a number is even.
+ *
+ * @param {number} n
+ * @returns {boolean}
+ */
+function isEven(n) {
+  // keep incrementing by two until you reach or exceed n
+  var num = Math.abs(n);
+  if (num === 0) {
+    return true;
+  }
+  if (num === 1) {
+    return false;
+  }
+  return isEven(num - 2);
+}
 
-// 4. Check if a number is even.
-var isEven = function(n) {
-};
-
+/**
+ * 
+ * @param {
+ * } n 
+ */
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
