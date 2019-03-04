@@ -115,25 +115,15 @@ var range = function(x, y) {
   var start;
   if (x < y) {
     start = x + 1;
-    if ((x === y) || (start === y)) {
-      return numbers;
-    }
-    if (start < y) {
-      const rest = range(start, y);
-      numbers.push(start);
-      return numbers.concat(rest);
-    }
   } else {
     start = x - 1;
-    if ((x === y) || (start === y)) {
-      return numbers;
-    }
-    if (start < x) {
-      const rest = range(start, y);
-      numbers.push(start);
-      return numbers.concat(rest);
-    }
   }
+  if ((x === y) || (start === y)) {
+    return numbers;
+  }
+  const rest = range(start, y);
+  numbers.push(start);
+  return numbers.concat(rest);
 };
 
 // 7. Compute the exponent of a number.
