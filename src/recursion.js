@@ -7,17 +7,17 @@
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
 var factorial = function(n) {
-    //base case: n = 0
-    //recursive case: n * factorial(n-1)
-    if (n < 0) {
-        return null;
-    }
-    if (n === 0) {
-      return 1;
-    } else {
-       var result = n * factorial(n - 1);
-    }
-    return result;
+  //base case: n = 0
+  //recursive case: n * factorial(n-1)
+  if (n < 0) {
+    return null;
+  }
+  if (n === 0) {
+    return 1;
+  } else {
+    var result = n * factorial(n - 1);
+  }
+  return result;
 };
 
 // 2. Compute the sum of an array of integers.
@@ -112,14 +112,27 @@ var sumBelow = function(n) {
 // range(2,9); // [3,4,5,6,7,8] (x+1)
 var range = function(x, y) {
   var numbers = [];
-  var start = x + 1;
-  if ((x === y) || (start === y)) {
-    return numbers;
-  }
-  if (start < y) {
-    const rest = range(start, y);
-    numbers.push(start);
-    return numbers.concat(rest);
+  var start;
+  if (x < y) {
+    start = x + 1;
+    if ((x === y) || (start === y)) {
+      return numbers;
+    }
+    if (start < y) {
+      const rest = range(start, y);
+      numbers.push(start);
+      return numbers.concat(rest);
+    }
+  } else {
+    start = x - 1;
+    if ((x === y) || (start === y)) {
+      return numbers;
+    }
+    if (start < x) {
+      const rest = range(start, y);
+      numbers.push(start);
+      return numbers.concat(rest);
+    }
   }
 };
 
