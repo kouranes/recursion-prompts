@@ -102,9 +102,25 @@ var sumBelow = function(n) {
   return start + above;
 };
 
+/**
+ *
+ * @param {number} x
+ * @param {number} y
+ * @returns {Array<number>}
+ */
 // 6. Get the integers within a range (x, y).
-// range(2,9); // [3,4,5,6,7,8]
+// range(2,9); // [3,4,5,6,7,8] (x+1)
 var range = function(x, y) {
+  var numbers = [];
+  var start = x + 1;
+  if ((x === y) || (start === y)) {
+    return numbers;
+  }
+  if (start < y) {
+    const rest = range(start, y);
+    numbers.push(start);
+    return numbers.concat(rest);
+  }
 };
 
 // 7. Compute the exponent of a number.
