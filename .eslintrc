@@ -8,6 +8,10 @@
     "rules": {
         "consistent-return": "error",
         "no-var": 0,
-        "no-unused-vars": 0
+        "no-unused-vars": 0,
+        "vars-on-top": 0,
+        "func-names": 0,
+        "prefer-template": 0,
+        "space-before-function-paren": 0
     }
 }

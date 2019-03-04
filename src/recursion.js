@@ -26,25 +26,24 @@ var sum = function(array) {
   if (!Array.isArray(array)) {
     throw new Error('not an array ' + JSON.stringify(array));
   }
- //+ sum(array.slice(1)};
+  // sum(array.slice(1)};
   if (array.length === 0) {
     return 0;
-  } else {
-    const first = array[0];
-    if (typeof first !== 'number') {
-      throw new Error('not a number: ' + JSON.stringify({ first, array }));
-    }
-    const restOfArray = array.slice(1);
-    const sumOfRest = sum(restOfArray);
-    return first + sumOfRest;
   }
-}
+  const first = array[0];
+  if (typeof first !== 'number') {
+    throw new Error('not a number: ' + JSON.stringify({ first, array }));
+  }
+  const restOfArray = array.slice(1);
+  const sumOfRest = sum(restOfArray);
+  return first + sumOfRest;
+};
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
-//base case; aray of numbers
-//recursive case, one of the elements is an array
-var arraySum = function(array) {
+// base case; aray of numbers
+// recursive case, one of the elements is an array
+var arraySum = function (array) {
   var final;
   if (array.length > 0) {
     var first = array[0];
@@ -53,7 +52,7 @@ var arraySum = function(array) {
     if (Array.isArray(first)) {
       final = arraySum(first) + sumOfRest;
     } else {
-      final = first + sumOfRest
+      final = first + sumOfRest;
     }
   } else {
     return 0;
@@ -80,14 +79,27 @@ function isEven(n) {
 }
 
 /**
- * 
- * @param {
- * } n 
+ * 5. Sum all integers below a given integer.
+ * @param {number} n
+ * @returns {number}
  */
-// 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
+// basecase: n = 0, return 0
+// recursive n-1 + sumBelow(n-2)
+//
 var sumBelow = function(n) {
+  if (n === 0) {
+    return 0;
+  }
+  if (n > 0) {
+    const start = n - 1;
+    var below = sumBelow(start);
+    return start + below;
+  }
+  const start = n + 1;
+  var above = sumBelow(start);
+  return start + above;
 };
 
 // 6. Get the integers within a range (x, y).
