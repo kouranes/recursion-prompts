@@ -196,8 +196,33 @@ var reverse = function(string) {
   return last + reverse(rest) + first;
 };
 
-// 10. Write a function that determines if a string is a palindrome.
+/**
+ * // 10. Write a function that determines if a string is a palindrome.
+ * @param {string} string 
+ * @return {boolean}
+ *
+ */
+// if string[first] === string[last], palindrome(string.slice(1, -1))
+// if string.length === 1 return string
+// if string.length === 0, ??
+
 var palindrome = function(string) {
+  var newStr;
+  if ((string.length === 1) || (string.length === 0)) {
+    return true;
+  }
+  if (string.includes(' ')) {
+    newStr = string.split(' ').join('').toLowerCase();
+  } else {
+    newStr = string.toLowerCase();
+  }
+  var first = newStr[0];
+  var last = newStr[newStr.length - 1];
+  var rest = newStr.slice(1, -1);
+  if (first === last) {
+    return palindrome(rest);
+  }
+  return false;
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
