@@ -231,8 +231,9 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
-//basecase: x === y, return 0; or
-//recursive case: if y > x, then
+//simpler case: y only goes into x once, so return x - y
+//simplest case: x = y, return 0 
+//recursive case: y goes into x more than once, return modulo()
  * @param {number} x
  * @param {number} y
  * @return {number}
@@ -243,13 +244,12 @@ var modulo = function(x, y) {
   if (x === y) {
     return 0;
   }
-  var acc = y + y;
-  if (acc > x) {
-    return x - y;
+  var diff = x - y;
+  if (diff < y) {
+    return diff;
   }
-  modulo(x, acc);
+  return modulo(x - 1, y);
 };
-
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
