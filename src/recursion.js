@@ -169,8 +169,8 @@ var powerOfTwo = function(n) {
     return true;
   }
   var halfOfN = n / 2;
-  if (Number.isInteger(halfOfN)) {
-    powerOfTwo(halfOfN);
+  if ((Number.isInteger(halfOfN)) && !(n === 0)) {
+    return powerOfTwo(halfOfN);
   }
   return false;
 };
@@ -198,7 +198,7 @@ var reverse = function(string) {
 
 /**
  * // 10. Write a function that determines if a string is a palindrome.
- * @param {string} string 
+ * @param {string} string
  * @return {boolean}
  *
  */
@@ -225,13 +225,31 @@ var palindrome = function(string) {
   return false;
 };
 
-// 11. Write a function that returns the remainder of x divided by y without using the
+/**
+ * // 11. Write a function that returns the remainder of x divided by y without using the
 // modulo (%) operator.
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
+//basecase: x === y, return 0; or
+//recursive case: if y > x, then
+ * @param {number} x
+ * @param {number} y
+ * @return {number}
+ */
+//
+
 var modulo = function(x, y) {
+  if (x === y) {
+    return 0;
+  }
+  var acc = y + y;
+  if (acc > x) {
+    return x - y;
+  }
+  modulo(x, acc);
 };
+
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
