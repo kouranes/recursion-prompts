@@ -175,8 +175,25 @@ var powerOfTwo = function(n) {
   return false;
 };
 
-// 9. Write a function that reverses a string.
+/**
+ * // 9. Write a function that reverses a string.
+ * @param {string} string
+ * @return {string}
+ * recursive case: switch first and last, then switch rest
+ * basecase: switch first and last or string of one element
+*/
+
 var reverse = function(string) {
+  if (string.length === 0) {
+    return '';
+  }
+  if (string.length === 1) {
+    return string;
+  }
+  var first = string[0];
+  var last = string[string.length - 1];
+  var rest = string.slice(1, -1);
+  return last + reverse(rest) + first;
 };
 
 // 10. Write a function that determines if a string is a palindrome.
