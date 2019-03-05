@@ -241,14 +241,20 @@ var palindrome = function(string) {
 //
 
 var modulo = function(x, y) {
+  if (y === 0) {
+    return NaN;
+  }
   if (x === y) {
     return 0;
+  }
+  if (y > x) {
+    return x;
   }
   var diff = x - y;
   if (diff < y) {
     return diff;
   }
-  return modulo(x - 1, y);
+  return modulo(diff, y);
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
