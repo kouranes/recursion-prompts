@@ -295,7 +295,7 @@ var multiply = function(x, y) {
 // Math methods to arrive at an approximate quotient (ignore decimal endings). integer division? * @param {number} x
  * @param {number} y
  * @return {number}
- * // simplest case: 
+ * // simplest case:
  */
 
 var divide = function(x, y) {
@@ -327,11 +327,29 @@ var divide = function(x, y) {
 var gcd = function(x, y) {
 };
 
-// 15. Write a function that compares each character of two strings and returns true if
+/**
+ * // 15. Write a function that compares each character of two strings and returns true if
 // both are identical.
 // compareStr('house', 'houses') // false
 // compareStr('tomato', 'tomato') // true
+// simpler case: str1 and str2 have length 1, compare character
+// simplest case: str1 and str2 are both empty strings, return true
+// recursive case
+ * @param {string} str1 
+ * @param {string} str2 
+ * @return {boolean}
+ */
+
 var compareStr = function(str1, str2) {
+  if (str1.length !== str2.length) {
+    return false;
+  }
+  if (str1[0] === str2[0]) {
+    return true;
+  }
+  var rest1 = str1.slice(1);
+  var rest2 = str2.slice(1);
+  return true && compareStr(rest1, rest2);
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
