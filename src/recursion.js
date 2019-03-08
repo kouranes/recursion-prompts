@@ -247,6 +247,12 @@ var modulo = function(x, y) {
   if (x === y) {
     return 0;
   }
+  if (x < 0) {
+    return -modulo(-x, y);
+  }
+  if (y < 0) {
+    return modulo(x, -y);
+  }
   if (y > x) {
     return x;
   }
@@ -284,10 +290,34 @@ var multiply = function(x, y) {
   return x + multiply(x, y - 1);
 };
 
-// 13. Write a function that divides two numbers without using the / operator or
-// Math methods to arrive at an approximate quotient (ignore decimal endings).
+/**
+ * 13. Write a function that divides two numbers without using the / operator or
+// Math methods to arrive at an approximate quotient (ignore decimal endings). integer division? * @param {number} x
+ * @param {number} y
+ * @return {number}
+ * // simplest case: 
+ */
+
 var divide = function(x, y) {
+  if (y === 0) {
+    return NaN;
+  }
+  if (x < 0) {
+    return -divide(-x, y);
+  }
+  if (y < 0) {
+    return -divide(x, -y);
+  }
+  if (x < y) {
+    return 0;
+  }
+  if (x === y) {
+    return 1;
+  }
+  var diff = x - y;
+  return 1 + divide(diff, y);
 };
+
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
 // integers is the greatest integer that divides both x and y with no remainder.
