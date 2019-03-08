@@ -257,9 +257,31 @@ var modulo = function(x, y) {
   return modulo(diff, y);
 };
 
-// 12. Write a function that multiplies two numbers without using the * operator or
+/**
+ * 
+ * // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
+ * @param {number} x 
+ * @param {number} y 
+ * @return {number}
+ */
+// simpler case: x === 2 or y === 2, then return x + x or y 
+// simplest case: a y === 1, return x or x === 1, then return y
+// recursive case: number multiplied by multiplier greater than 2, then number + multiply()
 var multiply = function(x, y) {
+  if (x === 0 || y === 0) {
+    return 0;
+  }
+  if (y === 1) {
+    return x;
+  }
+  if (y === -1) {
+    return -x;
+  }
+  if (y < 0) {
+    return -x + multiply(x, y + 1);
+  }
+  return x + multiply(x, y - 1);
 };
 
 // 13. Write a function that divides two numbers without using the / operator or
