@@ -365,13 +365,10 @@ var gcd = function(x, y) {
 // recursive case:
  * @param {string} str1
  * @param {string} str2
- * @return {boolean}
+ * @returns {boolean}
  */
 
 var compareStr = function(str1, str2) {
-  // if (str1.length !== str2.length) {
-  //   return false;
-  // }
   if (str1 === '' && str2 === '') {
     return true;
   }
@@ -383,9 +380,26 @@ var compareStr = function(str1, str2) {
   return false;
 };
 
-// 16. Write a function that accepts a string and creates an array where each letter
+/**
+ * // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
+ * @param {string} str
+ @returns {Array<string>}
+ // get first element of str, this push to array, use array.concat to join arrays
+ // recursive case str.length > 0, createArray(str.slice(1))
+ // base case
+ // string.length === 0, return []
+ */
+
 var createArray = function(str) {
+  if (str.length === 0) { // basecase
+    return [];
+  }
+  var letters = [];
+  var firstLetter = str[0];
+  letters.push(firstLetter);
+  var rest = str.slice(1);
+  return letters.concat(createArray(rest));
 };
 
 // 17. Reverse the order of an array
