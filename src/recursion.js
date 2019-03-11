@@ -7,16 +7,15 @@
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
 var factorial = function(n) {
-  //base case: n = 0
-  //recursive case: n * factorial(n-1)
+  // base case: n = 0
+  // recursive case: n * factorial(n-1)
   if (n < 0) {
     return null;
   }
   if (n === 0) {
     return 1;
-  } else {
-    var result = n * factorial(n - 1);
   }
+  var result = n * factorial(n - 1);
   return result;
 };
 
@@ -348,7 +347,7 @@ var gcd = function(x, y) {
 };
 
 /**
- * // 15. Write a function that compares each character of two strings and returns true if
+ * 15. Write a function that compares each character of two strings and returns true if
 // both are identical.
 // compareStr('house', 'houses') // false
 // compareStr('tomato', 'tomato') // true
@@ -374,10 +373,10 @@ var compareStr = function(str1, str2) {
 };
 
 /**
- * // 16. Write a function that accepts a string and creates an array where each letter
+ * 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
  * @param {string} str
- @returns {Array<string>}
+ * @returns {Array<string>}
  // get first element of str, this push to array, use array.concat to join arrays
  // recursive case str.length > 0, createArray(str.slice(1))
  // base case
@@ -396,7 +395,7 @@ var createArray = function(str) {
 };
 
 /**
- // 17. Reverse the order of an array
+ * 17. Reverse the order of an array
  * @param {Array<*>} array
  * @returns {Array<*>}
  * if array.length === [], return [] base
@@ -418,7 +417,7 @@ var reverseArr = function(array) {
 };
 
 /**
- *  18. Create a new array with a given value and length.
+ * 18. Create a new array with a given value and length.
  * @param {*} value
  * @param {number} length
  * @returns {Array<*>}
@@ -444,7 +443,7 @@ var buildList = function(value, length) {
 // For multiples of five, output 'Buzz' instead of the number.
 // For numbers which are multiples of both three and five, output “FizzBuzz” instead of the number.
 // fizzBuzz(5) // ['1','2','Fizz','4','Buzz']
- * @param {number} n 
+ * @param {number} n
  * @returns {Array<number|string>}
  * basecase:  if n === 0, return empty array
  * recursive case: n > 0, check if n is multiple of 3 or 5 or both and add appropriate element empty array, then concat array to fizzbuzz(n - 1)
@@ -467,10 +466,29 @@ var fizzBuzz = function(n) {
   return fizzBuzz(n - 1).concat(numbers);
 };
 
-// 20. Count the occurence of a value in a list.
+/**
+ * 20. Count the occurence of a value in a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
+ * @param {Array<number|string>} array 
+ * @param {number|string} value 
+ * @returns {number}
+ * basecase: input empty array or value that is not in array, return 0
+ * simpler case: input is an array of length 1 with value as the only element, return 1
+ * recurse case: number of occurance of value in array.slice(0,1) + countOccurrence(array.slice(1), value)
+ */
+
 var countOccurrence = function(array, value) {
+  var occurrance;
+  var first = array[0];
+  var rest = array.slice(1);
+  if (array === [] || first !== value) {
+    occurrance = 0;
+  }
+  if (first === value) {
+    occurrance = 1;
+  }
+  return occurrance + countOccurrence(rest, value);
 };
 
 // 21. Write a recursive version of map.
