@@ -130,7 +130,7 @@ var range = function(x, y) {
  * 7. Compute the exponent of a number.
  * @param {number} base
  * @param {number} exp
- * @return {number}
+ * @returns {number}
 // The exponent of a number says how many times the base number is used as a factor.
 // 8^2 = 8 x 8 = 64. Here, 8 is the base and 2 is the exponent.
 // exponent(4,3); // 64
@@ -155,7 +155,7 @@ var exponent = function(base, exp) {
 
 /**
  * @param {number} n
- * @return {boolean}
+ * @returns {boolean}
 // 8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
@@ -178,7 +178,7 @@ var powerOfTwo = function(n) {
 /**
  * // 9. Write a function that reverses a string.
  * @param {string} string
- * @return {string}
+ * @returns {string}
  * recursive case: switch first and last, then switch rest
  * basecase: switch first and last or string of one element
 */
@@ -199,7 +199,7 @@ var reverse = function(string) {
 /**
  * // 10. Write a function that determines if a string is a palindrome.
  * @param {string} string
- * @return {boolean}
+ * @returns {boolean}
  *
  */
 // if string[first] === string[last], palindrome(string.slice(1, -1))
@@ -236,7 +236,7 @@ var palindrome = function(string) {
 //recursive case: y goes into x more than once, return modulo()
  * @param {number} x
  * @param {number} y
- * @return {number}
+ * @returns {number}
  */
 //
 
@@ -269,7 +269,7 @@ var modulo = function(x, y) {
 // Math methods.
  * @param {number} x
  * @param {number} y
- * @return {number}
+ * @returns {number}
  */
 // simpler case: x === 2 or y === 2, then return x + x or y
 // simplest case: a y === 1, return x or x === 1, then return y
@@ -295,7 +295,7 @@ var multiply = function(x, y) {
 // Math methods to arrive at an approximate quotient (ignore decimal endings). integer division?
  * @param {number} x
  * @param {number} y
- * @return {number}
+ * @returns {number}
  * // simplest case:
  */
 
@@ -330,7 +330,7 @@ var divide = function(x, y) {
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
  * @param {number} x
  * @param {number} y
- * @return {number}
+ * @returns {number}
  */
 
 var gcd = function(x, y) {
@@ -395,8 +395,26 @@ var createArray = function(str) {
   return letters.concat(createArray(rest));
 };
 
-// 17. Reverse the order of an array
+/**
+ // 17. Reverse the order of an array
+ * @param {Array<*>} array
+ * @returns {Array<*>}
+ * if array.length === [], return [] base
+ * if array.length === 1, return [array[0]]
+ * else: return lastElement + reverseArr(array.slice(1, -1)) + firstElement
+ */
+
 var reverseArr = function(array) {
+  if (array.length === 0) {
+    return [];
+  }
+  if (array.length === 1) {
+    return array;
+  }
+  var first = array.slice(0, 1);
+  var last = array.slice(-1);
+  var rest = array.slice(1, -1);
+  return last.concat(reverseArr(rest), first);
 };
 
 // 18. Create a new array with a given value and length.
