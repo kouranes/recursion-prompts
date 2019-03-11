@@ -334,22 +334,26 @@ var gcd = function(x, y) {
 // compareStr('tomato', 'tomato') // true
 // simpler case: str1 and str2 have length 1, compare character
 // simplest case: str1 and str2 are both empty strings, return true
-// recursive case
+// needs to be more recursive:
+// recursive case:
  * @param {string} str1 
  * @param {string} str2 
  * @return {boolean}
  */
 
 var compareStr = function(str1, str2) {
-  if (str1.length !== str2.length) {
-    return false;
-  }
-  if (str1[0] === str2[0]) {
+  // if (str1.length !== str2.length) {
+  //   return false;
+  // }
+  if (str1 === '' && str2 === '') {
     return true;
   }
-  var rest1 = str1.slice(1);
-  var rest2 = str2.slice(1);
-  return true && compareStr(rest1, rest2);
+  if (str1[0] === str2[0]) {
+    var rest1 = str1.slice(1);
+    var rest2 = str2.slice(1);
+    return true && compareStr(rest1, rest2);
+  }
+  return false;
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
