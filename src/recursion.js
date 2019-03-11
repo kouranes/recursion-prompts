@@ -327,7 +327,6 @@ var divide = function(x, y) {
 // if smallerNumber >= largerNumber, return larger number
 // else  return GCD(smallerNumber++, largerNumber)
 //base case 2: if largerNumber % smallerNumber === 0
-// http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
  * @param {number} x
  * @param {number} y
@@ -335,23 +334,17 @@ var divide = function(x, y) {
  */
 
 var gcd = function(x, y) {
-  var larger;
-  var smaller;
-  var result;
-  if (x > y) {
-    larger = x;
-    smaller = y;
-  } else {
-    larger = y;
-    smaller = x;
+  if (x < 0 || y < 0) {
+    return null;
   }
-  if (larger <= smaller) {
-    return smaller;
+  if (x === 0) { // basecase1
+    return y;
   }
-  if ((smaller < larger) && (larger % smaller === 0)) {
-    result = gcd(larger, smaller + 1);
+  if (y === 0) { // basecase2
+    return x;
   }
-  return result;
+  var remainder = x % y; // gcd(x, y) === gcd(y, remainder)
+  return gcd(y, remainder);
 };
 
 /**
