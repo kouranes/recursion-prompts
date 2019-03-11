@@ -232,7 +232,7 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 //simpler case: y only goes into x once, so return x - y
-//simplest case: x = y, return 0 
+//simplest case: x = y, return 0
 //recursive case: y goes into x more than once, return modulo()
  * @param {number} x
  * @param {number} y
@@ -264,14 +264,14 @@ var modulo = function(x, y) {
 };
 
 /**
- * 
+ *
  * // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
- * @param {number} x 
- * @param {number} y 
+ * @param {number} x
+ * @param {number} y
  * @return {number}
  */
-// simpler case: x === 2 or y === 2, then return x + x or y 
+// simpler case: x === 2 or y === 2, then return x + x or y
 // simplest case: a y === 1, return x or x === 1, then return y
 // recursive case: number multiplied by multiplier greater than 2, then number + multiply()
 var multiply = function(x, y) {
@@ -292,7 +292,8 @@ var multiply = function(x, y) {
 
 /**
  * 13. Write a function that divides two numbers without using the / operator or
-// Math methods to arrive at an approximate quotient (ignore decimal endings). integer division? * @param {number} x
+// Math methods to arrive at an approximate quotient (ignore decimal endings). integer division?
+ * @param {number} x
  * @param {number} y
  * @return {number}
  * // simplest case:
@@ -318,13 +319,39 @@ var divide = function(x, y) {
   return 1 + divide(diff, y);
 };
 
-
-// 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
+/**
+ * 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
 // integers is the greatest integer that divides both x and y with no remainder.
 // gcd(4,36); // 4
+// increment x or y (the smallerNumber) until  smallerNumber >= largerNumber
+// if smallerNumber >= largerNumber, return larger number
+// else  return GCD(smallerNumber++, largerNumber)
+//base case 2: if largerNumber % smallerNumber === 0
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
+ * @param {number} x
+ * @param {number} y
+ * @return {number}
+ */
+
 var gcd = function(x, y) {
+  var larger;
+  var smaller;
+  var result;
+  if (x > y) {
+    larger = x;
+    smaller = y;
+  } else {
+    larger = y;
+    smaller = x;
+  }
+  if (larger <= smaller) {
+    return smaller;
+  }
+  if ((smaller < larger) && (larger % smaller === 0)) {
+    result = gcd(larger, smaller + 1);
+  }
+  return result;
 };
 
 /**
@@ -336,8 +363,8 @@ var gcd = function(x, y) {
 // simplest case: str1 and str2 are both empty strings, return true
 // needs to be more recursive:
 // recursive case:
- * @param {string} str1 
- * @param {string} str2 
+ * @param {string} str1
+ * @param {string} str2
  * @return {boolean}
  */
 
