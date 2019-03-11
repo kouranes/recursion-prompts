@@ -438,12 +438,33 @@ var buildList = function(value, length) {
   return values.concat(buildList(value, length - 1));
 };
 
+/**
 // 19. Implement FizzBuzz. Given integer n, return an array of the string representations of 1 to n.
 // For multiples of three, output 'Fizz' instead of the number.
 // For multiples of five, output 'Buzz' instead of the number.
 // For numbers which are multiples of both three and five, output “FizzBuzz” instead of the number.
 // fizzBuzz(5) // ['1','2','Fizz','4','Buzz']
+ * @param {number} n 
+ * @returns {Array<number|string>}
+ * basecase:  if n === 0, return empty array
+ * recursive case: n > 0, check if n is multiple of 3 or 5 or both and add appropriate element empty array, then concat array to fizzbuzz(n - 1)
+ */
+
 var fizzBuzz = function(n) {
+  var numbers = [];
+  if (n === 0) {
+    return numbers;
+  }
+  if ((n % 3 === 0) && (n % 5 === 0)) {
+    numbers.push('FizzBuzz');
+  } else if (n % 3 === 0) {
+    numbers.push('Fizz');
+  } else if (n % 5 === 0) {
+    numbers.push('Buzz');
+  } else {
+    numbers.push(n.toString());
+  }
+  return fizzBuzz(n - 1).concat(numbers);
 };
 
 // 20. Count the occurence of a value in a list.
