@@ -417,10 +417,25 @@ var reverseArr = function(array) {
   return last.concat(reverseArr(rest), first);
 };
 
-// 18. Create a new array with a given value and length.
+/**
+ *  18. Create a new array with a given value and length.
+ * @param {*} value
+ * @param {number} length
+ * @returns {Array<*>}
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
+// basecase1; length === 0, return []
+// basease2; length === 1, return array with value its only element
+// recursive case: concat [value] array recursively until an array of size length is constructed
+ */
+
 var buildList = function(value, length) {
+  var values = [];
+  if (length === 0) {
+    return values;
+  }
+  values.push(value);
+  return values.concat(buildList(value, length - 1));
 };
 
 // 19. Implement FizzBuzz. Given integer n, return an array of the string representations of 1 to n.
