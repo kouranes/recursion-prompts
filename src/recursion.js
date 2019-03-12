@@ -479,16 +479,15 @@ var fizzBuzz = function(n) {
  */
 
 var countOccurrence = function(array, value) {
-  var occurrance;
   var first = array[0];
   var rest = array.slice(1);
-  if (array === [] || first !== value) {
-    occurrance = 0;
+  if (array.length === 0) {
+    return 0;
   }
   if (first === value) {
-    occurrance = 1;
+    return 1 + countOccurrence(rest, value);
   }
-  return occurrance + countOccurrence(rest, value);
+  return countOccurrence(rest, value);
 };
 
 // 21. Write a recursive version of map.
