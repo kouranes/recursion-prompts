@@ -497,9 +497,9 @@ var countOccurrence = function(array, value) {
  * @return {Array<*>}
  * simplest case: empty array, return empty array  of array only contains 1 element, callback on that element and then push it into a new array
  * recursively call map until you get an empty array
+ * rMap([1,2,3], timesTwo); // [2,4,6]
  */
 
-// rMap([1,2,3], timesTwo); // [2,4,6]
 var rMap = function(array, callback) {
   var first = array[0];
   var mapped = [];
@@ -512,11 +512,32 @@ var rMap = function(array, callback) {
   return mapped.concat(rMap(rest, callback));
 };
 
-// 22. Write a function that counts the number of times a key occurs in an object.
+/**
+ * 22. Write a function that counts the number of times a key occurs in an object.
 // var obj = {'e':{'x':'y'},'t':{'r':{'e':'r'},'p':{'y':'r'}},'y':'e'};
 // countKeysInObj(obj, 'r') // 1
 // countKeysInObj(obj, 'e') // 2
+ * @param {object} obj 
+ * @param {string} key 
+ * @returns {number}
+ * simplest: obj is an empty object, return 0
+ * simpler: every value in obj is type string
+ * recursive: obj contains a value of type object, then call countKeysInObj where obj = value that is an object and key
+ */
+
 var countKeysInObj = function(obj, key) {
+  var keys = Object.keys(obj);
+  var count = 0;
+  for (var i = 0; i < keys.length; i++) { // anything that gets here is an object with at least 1 key-value pair
+    if (keys[i] === key) {
+      count += 1;
+    }
+    var value = obj[keys[i]];
+    if (typeof value === 'object') {
+      count += countKeysInObj(value, key); //
+    }
+  }
+  return count;
 };
 
 // 23. Write a function that counts the number of times a value occurs in an object.
