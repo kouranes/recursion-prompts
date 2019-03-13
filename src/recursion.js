@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-plusplus */
 /* jshint esversion: 6 */
 
 // Solve the following prompts using recursion.
@@ -566,9 +568,33 @@ var countValuesInObj = function(obj, value) {
   return count;
 };
 
-// 24. Find all keys in an object (and nested objects) by a provided name and rename
-// them to a provided new name while preserving the value stored at that key.
+/**
+ * 24. Find all keys in an object (an1d nested objects) by a provided name and rename
+ * them to a provided new name while preserving the value stored at that key.
+ * @param {object} obj 
+ * @param {string} oldKey 
+ * @param {string} newKey 
+ * @returns {object}
+ * do this on object with no nested objects (cycle through keys to check and replace)
+ * extend function so that it can handle nested objects
+ * exit condition: obj has no values that are type property
+ *  {e:{x:'y'},t:{r:{e:'r'},p:{y:'r'}},y:'e'};
+ * */
+
 var replaceKeysInObj = function(obj, oldKey, newKey) {
+  var keys = Object.keys(obj);
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    var value = obj[key];
+    if (typeof value === 'object') {
+      replaceKeysInObj(value, oldKey, newKey);
+    }
+    if (key === oldKey) {
+      delete obj[key];
+      obj[newKey] = value;
+    }
+  }
+  return obj;
 };
 
 // 25. Get the first n Fibonacci numbers. In the Fibonacci sequence, each subsequent
