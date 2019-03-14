@@ -1,3 +1,4 @@
+/* eslint-disable one-var */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
 /* jshint esversion: 6 */
@@ -684,10 +685,11 @@ var capitalizeFirst = function(array) {
   capitalized.push(current);
   var result = capitalized.concat(capitalizeFirst(restArray));
   return result;
-
 };
 
-// 29. Return the sum of all even numbers in an object containing nested objects.
+
+/**
+ * 29. Return the sum of all even numbers in an object containing nested objects.
 // var obj1 = {
 //   a: 2,
 //   b: {b: 2, bb: {b: 3, bb: {b: 2}}},
@@ -696,7 +698,32 @@ var capitalizeFirst = function(array) {
 //   e: {e: {e: 2}, ee: 'car'}
 // };
 // nestedEvenSum(obj1); // 10
+ * @param {*} obj
+ * @returns {number}
+ * basecase: empty object, return 0
+ * simpler: no nested objects, return sum of all even values by iterating through
+ * object and checking keys
+ * recursive: some values are nested structures, iterate through outer object, if
+ *  a key has a value of type object, call recursively
+ */
+
 var nestedEvenSum = function(obj) {
+  var sum = 0;
+  var keys = Object.keys(obj);
+  if (keys.length === 0) {
+    return sum;
+  }
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    var value = obj[key];
+    if (typeof value === 'object') {
+      sum += nestedEvenSum(value);
+    }
+    if (value % 2 === 0) {
+      sum += value;
+    }
+  }
+  return sum;
 };
 
 // 30. Flatten an array containing nested arrays.
