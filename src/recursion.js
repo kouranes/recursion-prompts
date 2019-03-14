@@ -735,27 +735,36 @@ var nestedEvenSum = function(obj) {
 /**
  * 30. Flatten an array containing nested arrays.
 // flatten([1,[2],[3,[[4]]],5]); // [1,2,3,4,5]
- * @param {Array<*>} array
- * @returns {Array<*>}
- * iterate through array checking if element is array -> if element is array, concat that array to 
- * outer array
- * basecase: no nested arrays -> return array
- * recursive case: contains nested arrays -> build new array
+ * @param {Array<number>} array
+ * @returns {Array<number>}
+ * iterate through array by slicing, check if element is array -> if element is array, concat
+ * that array to outer array
+ * basecase: no nested arrays
+ * recursive case: contains nested arrays
  */
 
 var flatten = function(array) {
-  var flattened = [];
-  var result;
+  var first = array.slice(0, 1); // array
+  var current = first[0]; // array or number
+  var rest = array.slice(1); // array
+  var flat = [];
   if (array.length === 0) {
-    return flattened;
+    return flat;
   }
-  for (var i = 0; i < array.length; i++) {
-    if (Array.isArray(array)) {
-      result = flattened.concat(array[i]);
-    }
-    result = flattened.push(array[i]);
+  if (!Array.isArray(current)) {
+    flat = first.concat(flatten(rest));
   }
-  return result;
+  if (Array.isArray(current)) {
+    flat = first.concat(flatten(current), flatten(rest));
+  }
+  return flat;
+  // for (var i = 0; i < array.length; i++) {
+  //   if (Array.isArray(array)) {
+  //     result = flattened.concat(array[i]);
+  //   }
+  //   result = flattened.push(array[i]);
+  // }
+  // return result;
 };
 
 // 31. Given a string, return an object containing tallies of each letter.
