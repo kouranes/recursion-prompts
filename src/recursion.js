@@ -597,26 +597,70 @@ var replaceKeysInObj = function(obj, oldKey, newKey) {
   return obj;
 };
 
-// 25. Get the first n Fibonacci numbers. In the Fibonacci sequence, each subsequent
+/**
+ * 25. Get the first n Fibonacci numbers. In the Fibonacci sequence, each subsequent
 // number is the sum of the previous two.
 // Example: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34.....
 // fibonacci(5); // [0,1,1,2,3,5]
 // Note: The 0 is not counted.
+ * @param {number} n 
+ * @returns {Array<number>}
+ * basecase: n = 0
+ * fibn = fib(n-1) + fib(n-2)
+ * fib1 => 1, fib2 => 1, fib3 => 2
+ *  */
+
 var fibonacci = function(n) {
+  var fibs = [];
+  if (n === 0) {
+    return fibs.push(0);
+  }
+  if (n === 1) {
+    return fibs.push(1);
+  }
+  var minus1 = n - 1;
+  var minus2 = n - 2;
+  fibs.push(fibonacci(minus1 + minus2));
+  return fibs;
 };
 
-// 26. Return the Fibonacci number located at index n of the Fibonacci sequence.
+/**
+ * 26. Return the Fibonacci number located at index n of the Fibonacci sequence.
 // [0,1,1,2,3,5,8,13,21]
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
+ * @param {number} n 
+ * @returns {number}
+ */
+
 var nthFibo = function(n) {
+
+
 };
 
-// 27. Given an array of words, return a new array containing each word capitalized.
+/**
+ * 27. Given an array of words, return a new array containing each word capitalized.
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
+ * @param {Array<string>} array 
+ * @returns {Array<string>} 
+ * basecase: empty array, return empty arraay
+ * simplecase: one string, return string.toUpperCase()
+ * recursive: array.length>1, iteratate through array recursively
+ */
+
 var capitalizeWords = function(array) {
+  var allCaps = [];
+  var current = array[0]; // number
+  var rest = array.slice(1); // array
+  if (array.length === 0) {
+    return allCaps;
+  }
+  current = current.toUpperCase();
+  allCaps.push(current);
+  var result = allCaps.concat(capitalizeWords(rest));
+  return result;
 };
 
 // 28. Given an array of strings, capitalize the first letter of each index.
