@@ -449,7 +449,8 @@ var buildList = function(value, length) {
  * @param {number} n
  * @returns {Array<number|string>}
  * basecase:  if n === 0, return empty array
- * recursive case: n > 0, check if n is multiple of 3 or 5 or both and add appropriate element empty array, then concat array to fizzbuzz(n - 1)
+ * recursive case: n > 0, check if n is multiple of 3 or 5 or both and add appropriate element 
+ * empty array, then concat array to fizzbuzz(n - 1)
  */
 
 var fizzBuzz = function(n) {
@@ -478,7 +479,8 @@ var fizzBuzz = function(n) {
  * @returns {number}
  * basecase: input empty array or value that is not in array, return 0
  * simpler case: input is an array of length 1 with value as the only element, return 1
- * recurse case: number of occurance of value in array.slice(0,1) + countOccurrence(array.slice(1), value)
+ * recurse case: number of occurance of value in array.slice(0,1) +
+ *  countOccurrence(array.slice(1), value)
  */
 
 var countOccurrence = function(array, value) {
@@ -498,7 +500,8 @@ var countOccurrence = function(array, value) {
  * @param {Array<*>} array
  * @param {function} callback
  * @return {Array<*>}
- * simplest case: empty array, return empty array  of array only contains 1 element, callback on that element and then push it into a new array
+ * simplest case: empty array, return empty array  of array only contains 1 element, c
+ * allback on that element and then push it into a new array
  * recursively call map until you get an empty array
  * rMap([1,2,3], timesTwo); // [2,4,6]
  */
@@ -520,18 +523,19 @@ var rMap = function(array, callback) {
 // var obj = {'e':{'x':'y'},'t':{'r':{'e':'r'},'p':{'y':'r'}},'y':'e'};
 // countKeysInObj(obj, 'r') // 1
 // countKeysInObj(obj, 'e') // 2
- * @param {object} obj 
- * @param {string} key 
+ * @param {object} obj
+ * @param {string} key
  * @returns {number}
  * simplest: obj is an empty object, return 0
  * simpler: every value in obj is type string
- * recursive: obj contains a value of type object, then call countKeysInObj where obj = value that is an object and key
+ * recursive: obj contains a value of type object, then call countKeysInObj
+ * where obj = value that is an object and key
  */
 
 var countKeysInObj = function(obj, key) {
   var keys = Object.keys(obj);
   var count = 0;
-  for (var i = 0; i < keys.length; i++) { // anything that gets here is an object with at least 1 key-value pair
+  for (var i = 0; i < keys.length; i++) { // anything that gets here is an objectwith at least 1 key-value pair
     if (keys[i] === key) {
       count += 1;
     }
@@ -548,10 +552,9 @@ var countKeysInObj = function(obj, key) {
 // var obj = {'e':{'x':'y'},'t':{'r':{'e':'r'},'p':{'y':'r'}},'y':'e'};
 // countValuesInObj(obj, 'r') // 2
 // countValuesInObj(obj, 'e') // 1
- * @param {object} obj 
- * @param {number} value 
+ * @param {object} obj
+ * @param {number} value
  * @returns {number}
- * 
  */
 
 var countValuesInObj = function(obj, value) {
@@ -572,9 +575,9 @@ var countValuesInObj = function(obj, value) {
 /**
  * 24. Find all keys in an object (an1d nested objects) by a provided name and rename
  * them to a provided new name while preserving the value stored at that key.
- * @param {object} obj 
- * @param {string} oldKey 
- * @param {string} newKey 
+ * @param {object} obj
+ * @param {string} oldKey
+ * @param {string} newKey
  * @returns {object}
  * do this on object with no nested objects (cycle through keys to check and replace)
  * extend function so that it can handle nested objects
@@ -604,25 +607,28 @@ var replaceKeysInObj = function(obj, oldKey, newKey) {
 // Example: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34.....
 // fibonacci(5); // [0,1,1,2,3,5]
 // Note: The 0 is not counted.
- * @param {number} n 
+ * @param {number} n
  * @returns {Array<number>}
- * basecase: n = 0
- * fibn = fib(n-1) + fib(n-2)
- * fib1 => 1, fib2 => 1, fib3 => 2
+ * basecase: n = 0, push n, n = 1, push = n
+ * simplecase: n = 2, push ((n-1)+(n-2))
+ *
  *  */
 
 var fibonacci = function(n) {
-  var fibs = [];
-  if (n === 0) {
-    return fibs.push(0);
-  }
-  if (n === 1) {
-    return fibs.push(1);
-  }
+  var series = [0];
+  var fibN = [];
   var minus1 = n - 1;
   var minus2 = n - 2;
-  fibs.push(fibonacci(minus1 + minus2));
-  return fibs;
+  if (n <= 0) {
+    return null;
+  }
+  if (n <= 2) {
+    fibN.push(1);
+    return series.concat(fibN);
+  }
+  fibN = fibonacci(minus1).concat(fibonacci(minus2));
+  series.concat(fibN);
+  return series;
 };
 
 /**
@@ -726,9 +732,30 @@ var nestedEvenSum = function(obj) {
   return sum;
 };
 
-// 30. Flatten an array containing nested arrays.
+/**
+ * 30. Flatten an array containing nested arrays.
 // flatten([1,[2],[3,[[4]]],5]); // [1,2,3,4,5]
+ * @param {Array<*>} array
+ * @returns {Array<*>}
+ * iterate through array checking if element is array -> if element is array, concat that array to 
+ * outer array
+ * basecase: no nested arrays -> return array
+ * recursive case: contains nested arrays -> build new array
+ */
+
 var flatten = function(array) {
+  var flattened = [];
+  var result;
+  if (array.length === 0) {
+    return flattened;
+  }
+  for (var i = 0; i < array.length; i++) {
+    if (Array.isArray(array)) {
+      result = flattened.concat(array[i]);
+    }
+    result = flattened.push(array[i]);
+  }
+  return result;
 };
 
 // 31. Given a string, return an object containing tallies of each letter.
