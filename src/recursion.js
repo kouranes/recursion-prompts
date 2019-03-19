@@ -615,20 +615,16 @@ var replaceKeysInObj = function(obj, oldKey, newKey) {
  *  */
 
 var fibonacci = function(n) {
-  var series = [0];
-  var fibN = [];
-  var minus1 = n - 1;
-  var minus2 = n - 2;
   if (n <= 0) {
     return null;
   }
-  if (n <= 2) {
-    fibN.push(1);
-    return series.concat(fibN);
+  if (n === 1) {
+    return [0, 1];
   }
-  fibN = fibonacci(minus1).concat(fibonacci(minus2));
-  series.concat(fibN);
-  return series;
+  var previous = fibonacci(n - 1);
+  var next = previous[previous.length - 1] + previous[previous.length - 2];
+  previous.push(next);
+  return previous;
 };
 
 /**
