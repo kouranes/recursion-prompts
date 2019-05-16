@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-else-return */
 /* eslint-disable one-var */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
@@ -669,7 +671,7 @@ var capitalizeWords = function(array) {
 /**
  * 28. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car','poop','banana']); // ['Car','Poop','Banana']
- * @param {Array<string>} array 
+ * @param {Array<string>} 
  * @returns {Array<string>}
  */
 
@@ -710,6 +712,7 @@ var capitalizeFirst = function(array) {
  */
 
 var nestedEvenSum = function(obj) {
+  // eslint-disable-next-line no-shadow
   var sum = 0;
   var keys = Object.keys(obj);
   if (keys.length === 0) {
@@ -731,41 +734,57 @@ var nestedEvenSum = function(obj) {
 /**
  * 30. Flatten an array containing nested arrays.
 // flatten([1,[2],[3,[[4]]],5]); // [1,2,3,4,5]
- * @param {Array<number>} array
- * @returns {Array<number>}
- * iterate through array by slicing, check if element is array -> if element is array, concat
+ * iterate through array,
+ *  if element is array
+ *   begin iterating through this inner array
+ *    at each index, push the element to the outer array
+ *    if element is a array, call flatten on that element
  * that array to outer array
- * basecase: no nested arrays
- * recursive case: contains nested arrays
+ * basecase/exit: input is an array where none of the elements are arrays
+ * recursive case: input array contains some elements that are arrays themselves
  */
+var isNotArray = function(current) {
+  return !Array.isArray(current);
+};
 
 var flatten = function(array) {
-  var first = array.slice(0, 1); // array
-  var current = first[0]; // array or number
-  var rest = array.slice(1); // array
-  var flat = [];
-  if (array.length === 0) {
-    return flat;
+  var flatArray = [];
+  if (array.every(isNotArray)) {
+    return array.slice();
   }
-  if (!Array.isArray(current)) {
-    flat = first.concat(flatten(rest));
+  for (var i = 0; i < array.length; i++) {
+    if (isNotArray(array[i])) {
+      flatArray.push(array[i]);
+    } else {
+      let nestedArr = flatten(array[i]);
+      flatArray = flatArray.concat(nestedArr);
+    }
   }
-  if (Array.isArray(current)) {
-    flat = first.concat(flatten(current), flatten(rest));
-  }
-  return flat;
-  // for (var i = 0; i < array.length; i++) {
-  //   if (Array.isArray(array)) {
-  //     result = flattened.concat(array[i]);
-  //   }
-  //   result = flattened.push(array[i]);
-  // }
-  // return result;
+  return flatArray;
 };
 
 // 31. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {p:1, o:2, t:2, a:1}
-var letterTally = function(str, obj) {
+/* simplest case1: input = empty string, return empty object
+  simpest case2: input is a string with one char, return object with that char as the key and 1 as value
+  recursive case: iterate through string recursively with slice
+
+
+*/
+var letterTally = function(str, obj = {}) {
+  if (str.length === 0) {
+    return obj;
+  }
+  if (str.length > 0) {
+    let key = str[0];
+    if (obj.hasOwnProperty(key)) {
+      obj[key] += 1;
+    } else {
+      obj[key] = 1;
+    }
+  let rest = str.slice(1);
+  return letterTally(rest, obj);
+  }
 };
 
 // 32. Eliminate consecutive duplicates in a list. If the list contains repeated
@@ -773,8 +792,22 @@ var letterTally = function(str, obj) {
 // elements should not be changed.
 // compress([1,2,2,3,4,4,5,5,5]) // [1,2,3,4,5]
 // compress([1,2,2,3,4,4,2,5,5,5,4,4]) // [1,2,3,4,2,5,4]
-var compress = function(list) {
+/* create empty arr, recursively loop through list, at each element check in arr contains that elemen
+*/
+var compress = function(list)  {
+  let compressed = [];
+  if (list.length === 0) {
+    return compressed;
+  }
+  if (list.length > 0) {
+    let num = list[0]; // num
+    if (!arr.includes(num)) {
+      arr.push(num);
+    }
+  let remainder = list.slice(1);
+  return compress(remainder, arr);
 };
+
 
 // 33. Augment every element in a list with a new value where each element is an array
 // itself.
