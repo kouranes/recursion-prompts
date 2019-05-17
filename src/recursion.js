@@ -819,14 +819,29 @@ var compress = function(list) {
   return num.concat(compress(remainder));
 };
 
-// @ts-ignore
-compress([1,2,2,3,4,4,5,5,5]);
-
 // 33. Augment every element in a list with a new value where each element is an array
 // itself.
 // augmentElements([[],[3],[7]], 5); // [[5],[3,5],[7,5]]
-// @ts-ignore
+/*
+general idea: recursively loop through array
+input: array (of arrays), a number
+returns: array of arrays
+simplestcase: array = [], there's nothing to augment, so just return []
+or array = [[]], augment first element with aug (push value to array[0])
+recursivecase; array  = [[],[],[]]
+- slice at index 1 of array
+- push aug to slice[0];
+- slice array to include everything  after first element
+- return augmented slice[0].concat(augment(slice[rest]))
+*/
 var augmentElements = function(array, aug) {
+  if (array.length === 0) {
+    return [];
+  }
+  let first = array.slice(0, 1);
+  let remainder = array.slice(1);
+  first[0].push(aug);
+  return first.concat(augmentElements(remainder, aug));
 };
 
 // 34. Reduce a series of zeroes to a single 0.
