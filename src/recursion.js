@@ -1,3 +1,5 @@
+/* eslint-disable prefer-arrow-callback */
+// @ts-nocheck
 /* eslint-disable prefer-const */
 /* eslint-disable no-else-return */
 /* eslint-disable one-var */
@@ -639,6 +641,7 @@ var fibonacci = function(n) {
  * @returns {number}
  */
 
+// @ts-ignore
 var nthFibo = function(n) {
 
 
@@ -766,11 +769,11 @@ var flatten = function(array) {
 // 31. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {p:1, o:2, t:2, a:1}
 /* simplest case1: input = empty string, return empty object
-  simpest case2: input is a string with one char, return object with that char as the key and 1 as value
+simpest case2: input is a string with one char, return object with that char as the key and 
+1 as value
   recursive case: iterate through string recursively with slice
-
-
 */
+
 var letterTally = function(str, obj = {}) {
   if (str.length === 0) {
     return obj;
@@ -782,8 +785,8 @@ var letterTally = function(str, obj = {}) {
     } else {
       obj[key] = 1;
     }
-  let rest = str.slice(1);
-  return letterTally(rest, obj);
+    let rest = str.slice(1);
+    return letterTally(rest, obj);
   }
 };
 
@@ -792,32 +795,44 @@ var letterTally = function(str, obj = {}) {
 // elements should not be changed.
 // compress([1,2,2,3,4,4,5,5,5]) // [1,2,3,4,5]
 // compress([1,2,2,3,4,4,2,5,5,5,4,4]) // [1,2,3,4,2,5,4]
-/* create empty arr, recursively loop through list, at each element check in arr contains that elemen
+/* create empty arr, recursively loop through list, at each element check in arr contains that
+element
+how do to this with only one parameter? use concat
+- after pushing new number, check if the rest of list contains that number
+- it if does, then slice to remove it 
+then slice(lastIndexof + 1) and use that as new list for the next call to compress
+since slice returns -1 if it doesn't find the target, you know you which values only occur once
 */
-var compress = function(list)  {
-  let compressed = [];
+var compress = function(list) {
+   // because compressed is set to [] each time compress is called, it's 'forgetting' the numbers it's seen before
   if (list.length === 0) {
-    return compressed;
+    return [];
   }
-  if (list.length > 0) {
-    let num = list[0]; // num
-    if (!arr.includes(num)) {
-      arr.push(num);
-    }
-  let remainder = list.slice(1);
-  return compress(remainder, arr);
+  if (list[0] === list[1]) {
+    let remainder = list.slice[1];
+
+  }
+  let num = list.slice(0, 1); // array containing first element of list
+  // let filtered = list.filter(function(current) {
+  //   return current !== list[0];
+  // });
+  return num.concat(compress(filtered));
 };
 
+// @ts-ignore
+compress([1,2,2,3,4,4,5,5,5]);
 
 // 33. Augment every element in a list with a new value where each element is an array
 // itself.
 // augmentElements([[],[3],[7]], 5); // [[5],[3,5],[7,5]]
+// @ts-ignore
 var augmentElements = function(array, aug) {
 };
 
 // 34. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
+// @ts-ignore
 var minimizeZeroes = function(array) {
 };
 
@@ -825,19 +840,49 @@ var minimizeZeroes = function(array) {
 // their original sign. The first number in the index always needs to be positive.
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
+// @ts-ignore
 var alternateSign = function(array) {
 };
 
 // 36. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
+/* need to 1. identify number characters in input 2. convert them to word equivalents
+1. format input into usable form: separate string at the spaces 
+simplest case: no number characters in input string - return string
+also simple: 
+*/
+
 var numToText = function(str) {
+  let converted = '';
+  if (str.length === 0) {
+    return converted;
+  }
+  let words = str.split(' ');
+  let numbers = {};
+  let numChars = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+  let numWords = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+  for (let i = 0; i < numChars.length; i++) {
+    numbers[numChars[i]] = numWords[i];
+  }
+  let first = words[0];
+  if (numChars.includes(first)) {
+    converted += numbers[first];
+  } else {
+    converted += first;
+  }
+  let remainder = words.slice(1);
+  converted += numToText(remainder.join(' '));
+  return converted;
 };
+
+numToText('1');
 
 
 // *** EXTRA CREDIT ***
 
 // 37. Return the number of times a tag occurs in the DOM.
+// @ts-ignore
 var tagCount = function(tag, node) {
 };
 
@@ -845,12 +890,14 @@ var tagCount = function(tag, node) {
 // var array = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
 // binarySearch(array, 5) // 5
 // https://www.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search
+// @ts-ignore
 var binarySearch = function(array, target, min, max) {
 };
 
 // 39. Write a merge sort function.
 // mergeSort([34,7,23,32,5,62]) // [5,7,23,32,34,62]
 // https://www.khanacademy.org/computing/computer-science/algorithms/merge-sort/a/divide-and-conquer-algorithms
+// @ts-ignore
 var mergeSort = function(array) {
 };
 
@@ -859,5 +906,6 @@ var mergeSort = function(array) {
 // var obj2 = clone(obj1);
 // console.log(obj2); // {a:1,b:{bb:{bbb:2}},c:3}
 // obj1 === obj2 // false
+// @ts-ignore
 var clone = function(input) {
 };
