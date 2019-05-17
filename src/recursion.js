@@ -813,9 +813,6 @@ var compress = function(list) {
   if (list[0] === remainder[0]) {
     return compress(remainder);
   }
-  // let filtered = list.filter(function(current) {
-  //   return current !== list[0];
-  // });
   return num.concat(compress(remainder));
 };
 
@@ -847,10 +844,20 @@ var augmentElements = function(array, aug) {
 // 34. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
-// @ts-ignore
+/* general idea: pretty much same is removeduplicates
+*/
 var minimizeZeroes = function(array) {
+  if (array.length === 0) {
+    return [];
+  }
+  let start = array.slice(0, 1);
+  if (array[0] === 0 && array[1] === 0) {
+    return minimizeZeroes(array.slice(1));
+  }
+  return start.concat(minimizeZeroes(array.slice(1)));
 };
 
+minimizeZeroes([2,0,0,0,1,4]);
 // 35. Alternate the numbers in an array between positive and negative regardless of
 // their original sign. The first number in the index always needs to be positive.
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
