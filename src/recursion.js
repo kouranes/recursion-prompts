@@ -808,15 +808,15 @@ var compress = function(list) {
   if (list.length === 0) {
     return [];
   }
-  if (list[0] === list[1]) {
-    let remainder = list.slice[1];
-
-  }
   let num = list.slice(0, 1); // array containing first element of list
+  let remainder = list.slice(1);
+  if (list[0] === remainder[0]) {
+    return compress(remainder);
+  }
   // let filtered = list.filter(function(current) {
   //   return current !== list[0];
   // });
-  return num.concat(compress(filtered));
+  return num.concat(compress(remainder));
 };
 
 // @ts-ignore
