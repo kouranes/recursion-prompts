@@ -870,26 +870,29 @@ let isPositive = function(num) {
 };
 
 var alternateSign = function(array) {
+  let firstPair = array.slice(0, 2); // build result by concating new numbers to this array
+  let first = firstPair[0]; // first must always be positive
+  let next = firstPair[1]; // next must always be negative, if there's one element, it must be positive
+  let remainder = array.slice(2);
   if (array.length === 0) {
-    return [];
+    return firstPair;
   }
-  if (array.length === 1) { // if there's one element, it must be positive
-    if (array[0] < 0) {
-      array[0] *= -1;
-      return array;
+  if (array.length === 1) {
+    if (!isPositive(first)) {
+      firstPair[0] = first + -1;
     }
-    return array;
+    return firstPair;
   }
-  let results = array.slice(0, 1); // build result by concating new numbers to this array
-  let remainder = array.slice(1);
-  if (isPositive(array[0]) && isPositive(remainder[0])) {
-    remainder[0] *= -1;
+  if (!isPositive(first)) {
+    firstPair[0] = -1 * first;
   }
-  results = results.concat(alternateSign(remainder));
-  return results;
+  if (isPositive(next)) {
+    firstPair[1] = -1 * next;
+  }
+  return firstPair.concat(alternateSign(remainder));
 };
 
-alternateSign([2,-7,8,-3,1,-4]); // [1, -2]
+alternateSign([2,7]); // [2,-7,8,-3,1,-4]
 // 36. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
