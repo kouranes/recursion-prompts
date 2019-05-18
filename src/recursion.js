@@ -857,15 +857,39 @@ var minimizeZeroes = function(array) {
   return start.concat(minimizeZeroes(array.slice(1)));
 };
 
-minimizeZeroes([2,0,0,0,1,4]);
 // 35. Alternate the numbers in an array between positive and negative regardless of
 // their original sign. The first number in the index always needs to be positive.
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
-// @ts-ignore
-var alternateSign = function(array) {
+/* two parts to this, the part that iterates and the part that gives the appropriate sign
+the iterating part is the part that must be recursive
+*/
+
+let isPositive = function(num) {
+  return num >= 0;
 };
 
+var alternateSign = function(array) {
+  if (array.length === 0) {
+    return [];
+  }
+  if (array.length === 1) { // if there's one element, it must be positive
+    if (array[0] < 0) {
+      array[0] *= -1;
+      return array;
+    }
+    return array;
+  }
+  let results = array.slice(0, 1); // build result by concating new numbers to this array
+  let remainder = array.slice(1);
+  if (isPositive(array[0]) && isPositive(remainder[0])) {
+    remainder[0] *= -1;
+  }
+  results = results.concat(alternateSign(remainder));
+  return results;
+};
+
+alternateSign([2,-7,8,-3,1,-4]); // [1, -2]
 // 36. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
