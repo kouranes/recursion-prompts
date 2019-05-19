@@ -892,7 +892,6 @@ var alternateSign = function(array) {
   return firstPair.concat(alternateSign(remainder));
 };
 
-alternateSign([2,7]); // [2,-7,8,-3,1,-4]
 // 36. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
@@ -907,25 +906,22 @@ var numToText = function(str) {
   if (str.length === 0) {
     return converted;
   }
-  let words = str.split(' ');
-  let numbers = {};
+  let words = str.split(' '); // array of strings
   let numChars = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
   let numWords = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
-  for (let i = 0; i < numChars.length; i++) {
-    numbers[numChars[i]] = numWords[i];
-  }
   let first = words[0];
   if (numChars.includes(first)) {
-    converted += numbers[first];
+    let index = numChars.indexOf(first);
+    converted += numWords[index];
   } else {
     converted += first;
   }
-  let remainder = words.slice(1);
-  converted += numToText(remainder.join(' '));
+  let remainder = words.slice(1); // array, needs to be turned into string
+  converted += ' ' + numToText(remainder.join(' '));
   return converted;
 };
 
-numToText('1');
+numToText('2 dogs');
 
 
 // *** EXTRA CREDIT ***
